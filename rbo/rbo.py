@@ -127,7 +127,7 @@ class RankingSimilarity:
         if p == 1.0:
             weights = [1.0 for _ in range(k)]
         else:
-            self.assert_p(p)
+            self.validate_p(p)
             weights = [1.0 * (1 - p) * p**d for d in range(k)]
 
         # using dict for O(1) look up
@@ -174,7 +174,7 @@ class RankingSimilarity:
         paper.
         """
 
-        self.assert_p(p)
+        self.validate_p(p)
 
         if not self.N_S and not self.N_T:
             return 1  # both lists are empty
@@ -273,7 +273,7 @@ class RankingSimilarity:
         """
 
         # sanity check
-        self.assert_p(p)
+        self.validate_p(p)
 
         if d is None:
             d = min(self.N_S, self.N_T)
