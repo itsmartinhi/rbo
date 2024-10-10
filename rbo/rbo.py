@@ -36,11 +36,19 @@ class RankingSimilarity:
             verbose: If True, print out intermediate results. Default to False.
         """
 
-        assert type(S) in [list, np.ndarray]
-        assert type(T) in [list, np.ndarray]
+        # check the input types
+        if type(S) not in [list, np.ndarray]:
+            raise TypeError("S must be a list or numpy array.")
 
-        assert len(S) == len(set(S))
-        assert len(T) == len(set(T))
+        if type(T) not in [list, np.ndarray]:
+            raise TypeError("T must be a list or numpy array.")
+
+        # check the input values
+        if len(S) != len(set(S)):
+            raise ValueError("S must not have duplicate elements.")
+
+        if len(T) != len(set(T)):
+            raise ValueError("T must not have duplicate elements.")
 
         self.S, self.T = S, T
         self.N_S, self.N_T = len(S), len(T)
