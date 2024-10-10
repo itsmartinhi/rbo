@@ -67,15 +67,13 @@ class RankingSimilarity:
     def _bound_range(self, value: float) -> float:
         """Bounds the value to [0.0, 1.0]."""
 
-        try:
-            assert (0 <= value <= 1 or np.isclose(1, value))
+        if 0 <= value <= 1 or np.isclose(1, value):
             return value
 
-        except AssertionError:
-            print("Value out of [0, 1] bound, will bound it.")
-            larger_than_zero = max(0.0, value)
-            less_than_one = min(1.0, larger_than_zero)
-            return less_than_one
+        print("Value out of [0, 1] bound, will bound it.")
+        larger_than_zero = max(0.0, value)
+        less_than_one = min(1.0, larger_than_zero)
+        return less_than_one
 
     def rbo(
         self,
