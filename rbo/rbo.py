@@ -55,13 +55,16 @@ class RankingSimilarity:
         self.verbose = verbose
         self.p = 0.5  # just a place holder
 
-    def assert_p(self, p: float) -> None:
+    def validate_p(self, p: float) -> None:
         """Make sure p is between (0, 1), if so, assign it to self.p.
 
         Args:
             p (float): The value p.
         """
-        assert 0.0 < p < 1.0, "p must be between (0, 1)"
+
+        if not 0.0 < p < 1.0:
+            raise ValueError("p must be between (0, 1).")
+
         self.p = p
 
     def _bound_range(self, value: float) -> float:
